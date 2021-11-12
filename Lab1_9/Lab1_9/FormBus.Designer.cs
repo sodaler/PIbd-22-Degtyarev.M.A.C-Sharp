@@ -35,6 +35,7 @@ namespace Lab1_9
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.pictureBoxBus = new System.Windows.Forms.PictureBox();
+            this.ButtDoubleDeck = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBus)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,9 +43,9 @@ namespace Lab1_9
             // 
             this.buttonCreate.Location = new System.Drawing.Point(12, 12);
             this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(114, 54);
+            this.buttonCreate.Size = new System.Drawing.Size(201, 54);
             this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Создать";
+            this.buttonCreate.Text = "Создать автобус";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
@@ -109,11 +110,22 @@ namespace Lab1_9
             this.pictureBoxBus.TabIndex = 0;
             this.pictureBoxBus.TabStop = false;
             // 
+            // ButtDoubleDeck
+            // 
+            this.ButtDoubleDeck.Location = new System.Drawing.Point(266, 12);
+            this.ButtDoubleDeck.Name = "ButtDoubleDeck";
+            this.ButtDoubleDeck.Size = new System.Drawing.Size(202, 53);
+            this.ButtDoubleDeck.TabIndex = 6;
+            this.ButtDoubleDeck.Text = "Создать двухэтажный автобус";
+            this.ButtDoubleDeck.UseVisualStyleBackColor = true;
+            this.ButtDoubleDeck.Click += new System.EventHandler(this.buttonCreateDoubleDecker_Click);
+            // 
             // BusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 501);
+            this.Controls.Add(this.ButtDoubleDeck);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonUp);
@@ -135,6 +147,7 @@ namespace Lab1_9
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonDown;
+        private System.Windows.Forms.Button ButtDoubleDeck;
     }
 }
 

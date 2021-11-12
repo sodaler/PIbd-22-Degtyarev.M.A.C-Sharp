@@ -12,11 +12,17 @@ namespace Lab1_9
 {
     public partial class BusForm : Form
     {
-        private Bus bus;
+        private ITransport bus;
 
         public BusForm()
         {
             InitializeComponent();
+        }
+
+        public void Setbus(ITransport bus)
+        {
+            this.bus = bus;
+            Draw();
         }
 
         private void Draw()
@@ -30,10 +36,16 @@ namespace Lab1_9
         private void buttonCreate_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            bus = new Bus();
-            bus.Init(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Black,
-                Color.Red, true, true);
+            bus = new Bus(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue);
             bus.SetPosition(rnd.Next(30, 200), rnd.Next(30, 200), pictureBoxBus.Width, pictureBoxBus.Height);
+            Draw();
+        }
+
+        private void buttonCreateDoubleDecker_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            bus = new DoubleDecker(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue, Color.Black, true, true);
+            bus.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxBus.Width, pictureBoxBus.Height);
             Draw();
         }
 
