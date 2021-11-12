@@ -16,7 +16,7 @@ namespace Lab1_9
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BusForm());
+            Application.Run(new FormParking());
         }
     }
 }

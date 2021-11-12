@@ -16,14 +16,12 @@ namespace Lab1_9
         protected int _pictureWidth;
         
         protected int _pictureHeight;
-
         
         public int MaxSpeed { protected set; get; }
       
         public float Weight { protected set; get; }
         
         public Color MainColor { protected set; get; }
-
 
         public void SetPosition(int x, int y, int width, int height)
         {

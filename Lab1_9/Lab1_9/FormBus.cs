@@ -29,7 +29,7 @@ namespace Lab1_9
         {
             Bitmap bmp = new Bitmap(pictureBoxBus.Width, pictureBoxBus.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            bus.DrawTransport(gr);
+            bus?.DrawTransport(gr);
             pictureBoxBus.Image = bmp;
         }
 
