@@ -30,8 +30,6 @@ namespace DegtyarevBus
         private void InitializeComponent()
         {
             this.pictureBoxParking = new System.Windows.Forms.PictureBox();
-            this.buttonCreateBus = new System.Windows.Forms.Button();
-            this.buttonCreateDoubleDecker = new System.Windows.Forms.Button();
             this.TakeLabel = new System.Windows.Forms.Label();
             this.maskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.LabelPlace = new System.Windows.Forms.Label();
@@ -42,6 +40,7 @@ namespace DegtyarevBus
             this.textBoxNewLevelName = new System.Windows.Forms.TextBox();
             this.addParking = new System.Windows.Forms.Button();
             this.ParkingLabel = new System.Windows.Forms.Label();
+            this.buttonAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -54,28 +53,6 @@ namespace DegtyarevBus
             this.pictureBoxParking.Size = new System.Drawing.Size(1130, 587);
             this.pictureBoxParking.TabIndex = 0;
             this.pictureBoxParking.TabStop = false;
-            // 
-            // buttonCreateBus
-            // 
-            this.buttonCreateBus.Location = new System.Drawing.Point(1136, 228);
-            this.buttonCreateBus.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonCreateBus.Name = "buttonCreateBus";
-            this.buttonCreateBus.Size = new System.Drawing.Size(116, 57);
-            this.buttonCreateBus.TabIndex = 1;
-            this.buttonCreateBus.Text = "Припарковать автобус";
-            this.buttonCreateBus.UseVisualStyleBackColor = true;
-            this.buttonCreateBus.Click += new System.EventHandler(this.buttonSetBus_Click);
-            // 
-            // buttonCreateDoubleDecker
-            // 
-            this.buttonCreateDoubleDecker.Location = new System.Drawing.Point(1136, 289);
-            this.buttonCreateDoubleDecker.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonCreateDoubleDecker.Name = "buttonCreateDoubleDecker";
-            this.buttonCreateDoubleDecker.Size = new System.Drawing.Size(116, 72);
-            this.buttonCreateDoubleDecker.TabIndex = 2;
-            this.buttonCreateDoubleDecker.Text = "Припарковать двухэтажный автобус";
-            this.buttonCreateDoubleDecker.UseVisualStyleBackColor = true;
-            this.buttonCreateDoubleDecker.Click += new System.EventHandler(this.buttonSetDoubleDecker_Click);
             // 
             // TakeLabel
             // 
@@ -142,7 +119,7 @@ namespace DegtyarevBus
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(1144, 177);
+            this.buttonDelete.Location = new System.Drawing.Point(1140, 177);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(120, 32);
             this.buttonDelete.TabIndex = 8;
@@ -171,26 +148,35 @@ namespace DegtyarevBus
             // ParkingLabel
             // 
             this.ParkingLabel.AutoSize = true;
-            this.ParkingLabel.Location = new System.Drawing.Point(1170, 8);
+            this.ParkingLabel.Location = new System.Drawing.Point(1173, 8);
             this.ParkingLabel.Name = "ParkingLabel";
             this.ParkingLabel.Size = new System.Drawing.Size(60, 13);
-            this.ParkingLabel.TabIndex = 13;
+            this.ParkingLabel.TabIndex = 11;
             this.ParkingLabel.Text = "Парковки:";
             this.ParkingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(1140, 264);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(124, 53);
+            this.buttonAdd.TabIndex = 12;
+            this.buttonAdd.Text = "Добавить автобус";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonSetBus_Click);
             // 
             // FormParking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1283, 679);
+            this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.ParkingLabel);
             this.Controls.Add(this.addParking);
             this.Controls.Add(this.textBoxNewLevelName);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.listBoxParkings);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.buttonCreateDoubleDecker);
-            this.Controls.Add(this.buttonCreateBus);
             this.Controls.Add(this.pictureBoxParking);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormParking";
@@ -206,8 +192,6 @@ namespace DegtyarevBus
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxParking;
-        private System.Windows.Forms.Button buttonCreateBus;
-        private System.Windows.Forms.Button buttonCreateDoubleDecker;
         private System.Windows.Forms.Label TakeLabel;
         private System.Windows.Forms.MaskedTextBox maskedTextBox;
         private System.Windows.Forms.Label LabelPlace;
@@ -218,5 +202,6 @@ namespace DegtyarevBus
         private System.Windows.Forms.TextBox textBoxNewLevelName;
         private System.Windows.Forms.Button addParking;
         private System.Windows.Forms.Label ParkingLabel;
+        private System.Windows.Forms.Button buttonAdd;
     }
 }

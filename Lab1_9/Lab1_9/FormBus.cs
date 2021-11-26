@@ -19,7 +19,7 @@ namespace DegtyarevBus
             InitializeComponent();
         }
 
-        public void Setbus(ITransport bus)
+        public void SetBus(ITransport bus)
         {
             this.bus = bus;
             Draw();
