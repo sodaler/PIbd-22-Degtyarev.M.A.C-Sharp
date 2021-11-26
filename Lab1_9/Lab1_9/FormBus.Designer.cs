@@ -1,5 +1,5 @@
 ﻿
-namespace Lab1_9
+namespace DegtyarevBus
 {
     partial class BusForm
     {
@@ -53,7 +53,7 @@ namespace Lab1_9
             // buttonDown
             // 
             this.buttonDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDown.BackgroundImage = global::Lab1_9.Properties.Resources.down;
+            this.buttonDown.BackgroundImage = global::DegtyarevBus.Properties.Resources.down;
             this.buttonDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonDown.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonDown.Location = new System.Drawing.Point(848, 514);
@@ -67,7 +67,7 @@ namespace Lab1_9
             // buttonRight
             // 
             this.buttonRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRight.BackgroundImage = global::Lab1_9.Properties.Resources.right;
+            this.buttonRight.BackgroundImage = global::DegtyarevBus.Properties.Resources.right;
             this.buttonRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonRight.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonRight.Location = new System.Drawing.Point(877, 487);
@@ -81,7 +81,7 @@ namespace Lab1_9
             // buttonUp
             // 
             this.buttonUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonUp.BackgroundImage = global::Lab1_9.Properties.Resources.up;
+            this.buttonUp.BackgroundImage = global::DegtyarevBus.Properties.Resources.up;
             this.buttonUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonUp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonUp.Location = new System.Drawing.Point(848, 461);
@@ -95,7 +95,7 @@ namespace Lab1_9
             // buttonLeft
             // 
             this.buttonLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLeft.BackgroundImage = global::Lab1_9.Properties.Resources.left;
+            this.buttonLeft.BackgroundImage = global::DegtyarevBus.Properties.Resources.left;
             this.buttonLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonLeft.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonLeft.Location = new System.Drawing.Point(821, 487);

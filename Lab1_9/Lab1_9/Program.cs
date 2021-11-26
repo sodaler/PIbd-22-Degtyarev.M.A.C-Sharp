@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Lab1_9
+namespace DegtyarevBus
 {
     static class Program
     {

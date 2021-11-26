@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace Lab1_9
+namespace DegtyarevBus
 {
     public class DoubleDecker : Bus
     {
@@ -17,7 +17,7 @@ namespace Lab1_9
         public bool SecondFloor { private set; get; }
 
         public DoubleDecker(int maxSpeed, float weight, Color mainColor, Color dopColor,
-    bool headLight, bool secondFloor) :
+        bool headLight, bool secondFloor) :
             base(maxSpeed, weight, mainColor, 125, 90)
         {
             DopColor = dopColor;

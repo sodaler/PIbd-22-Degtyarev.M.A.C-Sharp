@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace Lab1_9
+namespace DegtyarevBus
 {
     public interface ITransport
     {
