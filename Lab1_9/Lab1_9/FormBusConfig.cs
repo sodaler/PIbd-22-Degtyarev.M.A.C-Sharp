@@ -139,7 +139,6 @@ namespace DegtyarevBus
         }
 
         private void panelColor_MouseDown(object sender, MouseEventArgs e)
-
         {
             if (bus != null)
                 (sender as Control).DoDragDrop((sender as Control).BackColor, DragDropEffects.Move | DragDropEffects.Copy);
