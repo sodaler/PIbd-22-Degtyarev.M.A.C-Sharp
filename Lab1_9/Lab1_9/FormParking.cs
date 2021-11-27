@@ -13,7 +13,6 @@ namespace DegtyarevBus
     public partial class FormParking : Form
     {
         private readonly ParkingCollection parkingCollection;
-
         public FormParking()
         {
             InitializeComponent();
@@ -74,7 +73,7 @@ namespace DegtyarevBus
 
         private void buttonDelParking_Click(object sender, EventArgs e)
         {
-           
+
             if (listBoxParkings.SelectedIndex > -1)
             {
                 if (MessageBox.Show($"Удалить построение { listBoxParkings.SelectedItem.ToString()}?",
@@ -84,61 +83,53 @@ namespace DegtyarevBus
                     ReloadLevels();
                 }
             }
-        }
-
-        private void buttonSetBus_Click(object sender, EventArgs e)
-        {        
-            if (listBoxParkings.SelectedIndex > -1)
+            else
             {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var bus = new Bus(100, 1000, dialog.Color);
-                    if (parkingCollection[listBoxParkings.SelectedItem.ToString()] + bus >= 0)
-                    { 
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Построение заполнено");
-                    }
-                }
+                MessageBox.Show("Добавьте парковку", "Ошибка",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void buttonSetDoubleDecker_Click(object sender, EventArgs e)
+        private void buttonSetBus_Click(object sender, EventArgs e)
         {
             if (listBoxParkings.SelectedIndex > -1)
             {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
+                var formBusConfig = new FormBusConfig();
+                formBusConfig.AddEvent(AddBus);
+                formBusConfig.Show();
+            }
+        }
+
+        private void AddBus(Vehicle bus)
+        {
+            if (bus != null && listBoxParkings.SelectedIndex > -1)
+            {
+                if (((parkingCollection[listBoxParkings.SelectedItem.ToString()]) + bus) != -1)
                 {
-                    ColorDialog dopDialog = new ColorDialog();
-                    if (dopDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        var doubleDecker = new DoubleDecker(100, 1000, dialog.Color, dopDialog.Color, true, true);
-                        if (parkingCollection[listBoxParkings.SelectedItem.ToString()] + doubleDecker >= 0)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Построение заполнено");
-                        }
-                    }
+                    Draw();
                 }
+                else
+                {
+                    MessageBox.Show("Автобус не удалось поставить");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Добавьте парковку", "Ошибка",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void buttonTakeBus_Click(object sender, EventArgs e)
         {
-            if (maskedTextBox.Text != "" && listBoxParkings.SelectedIndex > -1)
+            if (listBoxParkings.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-                var bus = parkingCollection[listBoxParkings.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
+                var bus = parkingCollection[listBoxParkings.SelectedItem.ToString()] -
+                Convert.ToInt32(maskedTextBox.Text);
                 if (bus != null)
                 {
                     BusForm form = new BusForm();
-                    form.Setbus(bus);
+                    form.SetBus(bus);
                     form.ShowDialog();
                 }
                 Draw();

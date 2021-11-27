@@ -51,5 +51,11 @@ namespace DegtyarevBus
             }
 
         }
+
+
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 }
