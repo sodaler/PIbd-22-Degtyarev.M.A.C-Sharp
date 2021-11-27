@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1_9
+namespace DegtyarevBus
 {
     public enum Direction
     {

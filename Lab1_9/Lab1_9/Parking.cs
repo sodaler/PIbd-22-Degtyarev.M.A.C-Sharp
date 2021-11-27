@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1_9
+namespace DegtyarevBus
 {
     class Parking<T> where T : class, ITransport
     {
-        private readonly T[] _places;
+        private readonly List<T> _places;
+
+        private readonly int _maxCount;
 
         private readonly int pictureWidth;
        
@@ -25,40 +27,39 @@ namespace Lab1_9
             int height = picHeight / _placeSizeHeight;     
             pictureWidth = picWidth;
             pictureHeight = picHeight;
-            _places = new T[width * height];
+            _places = new List<T>();
+            _maxCount = width * height;
         }
  
         public static int operator +(Parking<T> p, T bus)
         {
-            for (int i = 0; i < p._places.Length; i++)
+            if (p._places.Count != p._maxCount)
             {
-                if (p._places[i] == null)
-                {                  
-                    p._places[i] = bus;
-                    return i;
-                }
+                p._places.Add(bus);
+                return p._places.Count - 1;
             }
-            return -1;         
+            return -1;
         }
 
-        public static T operator -(Parking<T> p, int index)
+        public static T operator -(Parking<T> p, int i)
         {
-            if (index >= 0 && index <= p._places.Length && p._places[index] != null)
+            if ((i >= 0) && (i < p._places.Count))
             {
-                T bus = p._places[index];
-                p._places[index] = null;
-                return bus;
+                T result = p._places[i];
+                p._places.RemoveAt(i);
+                return result;
             }
-            return null;
+            else return null;
         }
 
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; ++i)
+            for (int i = 0; i < _places.Count; i++)
             {
                 _places[i]?.SetPosition(15 + i % 5 * _placeSizeWidth, i / 5 * _placeSizeHeight + 25, pictureWidth, pictureHeight);
                 _places[i]?.DrawTransport(g);
+
             }
         }
        
@@ -76,6 +77,5 @@ namespace Lab1_9
                 (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
         }
-
     }
 }

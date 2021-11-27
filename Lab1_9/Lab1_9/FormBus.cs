@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Lab1_9
+namespace DegtyarevBus
 {
     public partial class BusForm : Form
     {
