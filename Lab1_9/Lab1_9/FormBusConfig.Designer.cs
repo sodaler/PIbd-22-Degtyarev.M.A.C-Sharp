@@ -162,9 +162,9 @@
             // pictureBoxBus
             // 
             this.pictureBoxBus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxBus.Location = new System.Drawing.Point(5, 10);
+            this.pictureBoxBus.Location = new System.Drawing.Point(16, 15);
             this.pictureBoxBus.Name = "pictureBoxBus";
-            this.pictureBoxBus.Size = new System.Drawing.Size(217, 123);
+            this.pictureBoxBus.Size = new System.Drawing.Size(206, 118);
             this.pictureBoxBus.TabIndex = 1;
             this.pictureBoxBus.TabStop = false;
             // 
@@ -393,7 +393,5 @@
         private System.Windows.Forms.Label labelMainColor;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonCancel;
-        
-
     }
 }

@@ -42,7 +42,7 @@ namespace DegtyarevBus
             // buttonCreate
             // 
             this.buttonCreate.Location = new System.Drawing.Point(8, 8);
-            this.buttonCreate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCreate.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(134, 35);
             this.buttonCreate.TabIndex = 1;
@@ -57,7 +57,7 @@ namespace DegtyarevBus
             this.buttonDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonDown.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonDown.Location = new System.Drawing.Point(848, 514);
-            this.buttonDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDown.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDown.Name = "buttonDown";
             this.buttonDown.Size = new System.Drawing.Size(20, 19);
             this.buttonDown.TabIndex = 5;
@@ -71,7 +71,7 @@ namespace DegtyarevBus
             this.buttonRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonRight.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonRight.Location = new System.Drawing.Point(877, 487);
-            this.buttonRight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRight.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRight.Name = "buttonRight";
             this.buttonRight.Size = new System.Drawing.Size(20, 19);
             this.buttonRight.TabIndex = 4;
@@ -85,7 +85,7 @@ namespace DegtyarevBus
             this.buttonUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonUp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonUp.Location = new System.Drawing.Point(848, 461);
-            this.buttonUp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonUp.Margin = new System.Windows.Forms.Padding(2);
             this.buttonUp.Name = "buttonUp";
             this.buttonUp.Size = new System.Drawing.Size(20, 19);
             this.buttonUp.TabIndex = 3;
@@ -99,7 +99,7 @@ namespace DegtyarevBus
             this.buttonLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.buttonLeft.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonLeft.Location = new System.Drawing.Point(821, 487);
-            this.buttonLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLeft.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLeft.Name = "buttonLeft";
             this.buttonLeft.Size = new System.Drawing.Size(20, 19);
             this.buttonLeft.TabIndex = 2;
@@ -110,7 +110,7 @@ namespace DegtyarevBus
             // 
             this.pictureBoxBus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxBus.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxBus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBoxBus.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxBus.Name = "pictureBoxBus";
             this.pictureBoxBus.Size = new System.Drawing.Size(935, 548);
             this.pictureBoxBus.TabIndex = 0;
@@ -119,7 +119,7 @@ namespace DegtyarevBus
             // ButtDoubleDeck
             // 
             this.ButtDoubleDeck.Location = new System.Drawing.Point(177, 8);
-            this.ButtDoubleDeck.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ButtDoubleDeck.Margin = new System.Windows.Forms.Padding(2);
             this.ButtDoubleDeck.Name = "ButtDoubleDeck";
             this.ButtDoubleDeck.Size = new System.Drawing.Size(135, 34);
             this.ButtDoubleDeck.TabIndex = 6;
@@ -139,7 +139,7 @@ namespace DegtyarevBus
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.pictureBoxBus);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BusForm";
             this.Text = "Автобус";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBus)).EndInit();

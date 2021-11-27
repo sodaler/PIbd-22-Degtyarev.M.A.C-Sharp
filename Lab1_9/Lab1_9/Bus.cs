@@ -12,7 +12,9 @@ namespace DegtyarevBus
         protected readonly int busWidth = 140;
        
         protected readonly int busHeight = 90;
-        
+
+        protected readonly char separator = ';';
+
         public Bus(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
@@ -29,6 +31,18 @@ namespace DegtyarevBus
             this.busWidth = busWidth;
             this.busHeight = busHeight;
         }
+
+        public Bus(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+            }
+        }
+
         public override void MoveTransport(Direction direction)
         {
             float step = MaxSpeed * 100 / Weight;
@@ -80,6 +94,11 @@ namespace DegtyarevBus
             g.DrawEllipse(p, _startPosX + 70, _startPosY + 50, 15, 20);
             g.DrawEllipse(p, _startPosX + 90, _startPosY + 50, 15, 20);
             g.DrawEllipse(p, _startPosX + 110, _startPosY + 50, 15, 20);
+        }
+
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
         }
     }
 }

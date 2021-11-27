@@ -20,9 +20,26 @@ namespace DegtyarevBus
         bool headLight, bool secondFloor) :
             base(maxSpeed, weight, mainColor, 125, 90)
         {
+            MaxSpeed = maxSpeed;
+            Weight = weight;
+            MainColor = mainColor;
             DopColor = dopColor;
             HeadLight = headLight;
             SecondFloor = secondFloor;
+        }
+
+        public DoubleDecker(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 6)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                HeadLight = Convert.ToBoolean(strs[4]);
+                SecondFloor = Convert.ToBoolean(strs[5]);
+            }
         }
 
         public override void DrawTransport(Graphics g)
@@ -56,6 +73,13 @@ namespace DegtyarevBus
         public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+
+        public override string ToString()
+        {
+                
+            return $"{base.ToString()}{separator}{DopColor.Name}{separator}{SecondFloor}{separator}{HeadLight}";
+
         }
     }
 }

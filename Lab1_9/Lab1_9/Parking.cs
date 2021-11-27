@@ -30,9 +30,9 @@ namespace DegtyarevBus
             _places = new List<T>();
             _maxCount = width * height;
         }
- 
+
         public static int operator +(Parking<T> p, T bus)
-        {
+        {   
             if (p._places.Count != p._maxCount)
             {
                 p._places.Add(bus);
@@ -77,5 +77,15 @@ namespace DegtyarevBus
                 (pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
         }
+
+        public T GetNext(int index)
+        {
+            if (index < 0 || index >= _places.Count)
+            {
+                return null;
+            }
+            return _places[index];
+        }
+
     }
 }
