@@ -32,24 +32,24 @@ namespace DegtyarevBus
         }
 
         public static int operator +(Parking<T> p, T bus)
-        {   
-            if (p._places.Count != p._maxCount)
+        {
+            if (p._places.Count >= p._maxCount)
             {
-                p._places.Add(bus);
-                return p._places.Count - 1;
+                throw new BusStationOverflowException();
             }
-            return -1;
+            p._places.Add(bus);
+            return p._places.Count - 1;
         }
 
         public static T operator -(Parking<T> p, int i)
         {
-            if ((i >= 0) && (i < p._places.Count))
+            if (i < -1 || i > p._places.Count)
             {
-                T result = p._places[i];
-                p._places.RemoveAt(i);
-                return result;
+                throw new BusStationNotFoundException(i);
             }
-            else return null;
+            T bus = p._places[i];
+            p._places.RemoveAt(i);
+            return bus;
         }
 
         public void Draw(Graphics g)

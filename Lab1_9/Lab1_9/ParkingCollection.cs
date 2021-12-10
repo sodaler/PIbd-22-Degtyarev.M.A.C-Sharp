@@ -26,7 +26,7 @@ namespace DegtyarevBus
             this.pictureHeight = pictureHeight;
         }
 
-        public void AddParking(string name)
+        public void AddBusStation(string name)
         {
             if (parkingStages.ContainsKey(name))
             {
@@ -34,15 +34,15 @@ namespace DegtyarevBus
             }
             parkingStages.Add(name, new Parking<Vehicle>(pictureWidth, pictureHeight));
         }
-       
-        public void DelParking(string name)
+
+        public void DelBusStation(string name)
         {
             if (parkingStages.ContainsKey(name))
             {
                 parkingStages.Remove(name);
             }
         }
-        
+
         public Parking<Vehicle> this[string ind]
         {
             get
@@ -61,91 +61,83 @@ namespace DegtyarevBus
             {
                 File.Delete(filename);
             }
-            using (StreamWriter fs = new StreamWriter(filename))
+            using (StreamWriter sw = new StreamWriter(filename))
             {
-                fs.Write($"ParkingCollection{Environment.NewLine}", fs);
-                foreach (var level in parkingStages)
-                {                  
-                    fs.Write($"Parking{separator}{level.Key}{Environment.NewLine}", fs);
+                sw.WriteLine($"BusStationCollection");
+                foreach (KeyValuePair<string, Parking<Vehicle>> level in parkingStages)
+                {
+                    sw.WriteLine($"BusStation{separator}{level.Key}");
                     ITransport bus = null;
-
-                    for (int i = 0; (bus = level.Value.GetNext(i)) != null; i++)                        
+                    for (int i = 0; (bus = level.Value.GetNext(i)) != null; i++)
                     {
                         if (bus != null)
                         {
-                            
                             if (bus.GetType().Name == "Bus")
-
                             {
-                                fs.Write($"Bus{separator}", fs);
+                                sw.Write($"Bus{separator}");
                             }
-
                             if (bus.GetType().Name == "DoubleDecker")
-
                             {
-                                fs.Write($"DoubleDecker{separator}", fs);
+                                sw.Write($"DoubleDecker{separator}");
                             }
-                          
-                            fs.Write(bus + Environment.NewLine, fs);
+                            sw.WriteLine(bus);
                         }
                     }
                 }
-                return true;
-            }            
+            }
+            return true;
         }
 
         public bool LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException("Не найдено");
             }
-            parkingStages.Clear();
-
-            using (StreamReader sr = new StreamReader(filename, Encoding.UTF8))
+            string bufferTextFromFile = "";
+            using (StreamReader sr = new StreamReader(filename))
             {
-                String line;
-                
+                string line = sr.ReadLine();
+                if (line.Contains("BusStationCollection"))
+                {
+                    parkingStages.Clear();
+                }
+
+                else
+                {
+                    throw new FileFormatException("Формат файла неверный");
+                }
+
                 Vehicle bus = null;
                 string key = string.Empty;
-                line = sr.ReadLine();
-                if (!line.Contains("ParkingCollection"))
-                {
-                    return false;
-                }
                 while ((line = sr.ReadLine()) != null)
                 {
-                    
-                    if (line.Contains("Parking"))
-                    {                       
+                    if (line.Contains("BusStation"))
+                    {
                         key = line.Split(separator)[1];
                         parkingStages.Add(key, new Parking<Vehicle>(pictureWidth, pictureHeight));
+                        continue;
                     }
-                    else if (line.Split(separator)[0] == "Bus")
+                    if (string.IsNullOrEmpty(line))
                     {
-                        bus = new  Bus(line.Split(separator)[1]);
-                        var result = parkingStages[key] + bus;
-                        if (result < 0)
-                        {
-                            return false;
-                        }
+                        continue;
+                    }
+                    if (line.Split(separator)[0] == "Bus")
+                    {
+                        bus = new Bus(line.Split(separator)[1]);
                     }
                     else if (line.Split(separator)[0] == "DoubleDecker")
                     {
                         bus = new DoubleDecker(line.Split(separator)[1]);
-                        var result = parkingStages[key] + bus;
-                        if (result < 0)
-                        {
-                            return false;
-                        }
                     }
-                    else
+                    int result = parkingStages[key] + bus;
+                    if (result == -1)
                     {
-                        continue;
+                        throw new TypeLoadException("Не удалось загрузить автобус на стоянку");
                     }
                 }
+                return true;
             }
-            return true;
         }
     }
 }

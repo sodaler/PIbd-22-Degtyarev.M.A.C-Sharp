@@ -14,14 +14,8 @@ namespace DegtyarevBus
     public partial class FormBusConfig : Form
     {
 
-        /// <summary>
-        /// Переменная-выбранная машина
-        /// </summary>
         ITransport bus = null;
 
-        /// <summary>
-        /// Событие
-        /// </summary>
         private Action<Vehicle> eventAddBus;
 
         public FormBusConfig()
@@ -53,10 +47,6 @@ namespace DegtyarevBus
             }
         }
 
-        /// <summary>
-        /// Добавление события
-        /// </summary>
-        /// <param name="ev"></param>
         public void AddEvent(Action<Vehicle> ev)
         {
             if (eventAddBus == null)
@@ -75,11 +65,6 @@ namespace DegtyarevBus
             DragDropEffects.Copy);
         }
 
-        /// <summary>
-        /// Проверка получаемой информации (ее типа на соответствие требуемому)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void panelBus_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))
@@ -92,11 +77,6 @@ namespace DegtyarevBus
             }
         }
 
-        /// <summary>
-        /// Действия при приеме перетаскиваемой информации
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void panelBus_DragDrop(object sender, DragEventArgs e)
         {
             switch (e.Data.GetData(DataFormats.Text).ToString())
@@ -105,7 +85,7 @@ namespace DegtyarevBus
                     bus = new Bus((int)numericUpDownMaxSpeed.Value, (int)numericUpDownWeight.Value, Color.White);
                     break;
                 case "Двухэтажный автобус":
-                    bus = new DoubleDecker((int)numericUpDownMaxSpeed.Value, (int)numericUpDownWeight.Value, Color.White, Color.Black, checkBoxHeadLight.Checked, checkBoxSecondFloor.Checked);
+                    bus = new DoubleDecker((int)numericUpDownMaxSpeed.Value, (int)numericUpDownWeight.Value, Color.White, Color.Black, checkBoxSecondFloor.Checked, checkBoxHeadLight.Checked);
                     break;
             }
             DrawBus();
@@ -139,6 +119,7 @@ namespace DegtyarevBus
         }
 
         private void panelColor_MouseDown(object sender, MouseEventArgs e)
+            
         {
             if (bus != null)
                 (sender as Control).DoDragDrop((sender as Control).BackColor, DragDropEffects.Move | DragDropEffects.Copy);
@@ -158,6 +139,6 @@ namespace DegtyarevBus
         {
             eventAddBus?.Invoke((Vehicle)bus);
             Close();
-        }
+        }  
     }
 }
