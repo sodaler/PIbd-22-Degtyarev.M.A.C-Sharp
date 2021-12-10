@@ -172,7 +172,7 @@ namespace DegtyarevBus
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    logger.Warn("Неизвестаня ошибка");
+                    logger.Warn("Неизвестная ошибка");
                 }
             }
         }
