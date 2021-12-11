@@ -52,10 +52,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bus.cs" />
+    <Compile Include="BusComparer.cs" />
     <Compile Include="DoubleDecker.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="FormBus.cs">
@@ -70,17 +70,19 @@
     <Compile Include="FormBusConfig.Designer.cs">
       <DependentUpon>FormBusConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormBusStation.cs">
+    <Compile Include="FormParking.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBusStation.Designer.cs">
-      <DependentUpon>FormBusStation.cs</DependentUpon>
+    <Compile Include="FormParking.Designer.cs">
+      <DependentUpon>FormParking.cs</DependentUpon>
     </Compile>
     <Compile Include="ITransport.cs" />
     <Compile Include="Parking.cs" />
-    <Compile Include="BusStationNotFoundException.cs" />
-    <Compile Include="BusStationOverFlowException.cs" />
+    <Compile Include="ParkingAlreadyHaveException.cs" />
     <Compile Include="ParkingCollection.cs" />
+    <Compile Include="ParkingNotFoundException.cs" />
+    <Compile Include="ParkingOccupiedPlaceException.cs" />
+    <Compile Include="ParkingOverFlowException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vehicle.cs" />
@@ -90,8 +92,8 @@
     <EmbeddedResource Include="FormBusConfig.resx">
       <DependentUpon>FormBusConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormBusStation.resx">
-      <DependentUpon>FormBusStation.cs</DependentUpon>
+    <EmbeddedResource Include="FormParking.resx">
+      <DependentUpon>FormParking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

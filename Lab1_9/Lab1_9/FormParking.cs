@@ -51,7 +51,7 @@ namespace DegtyarevBus
         {
             if (listBoxParkings.SelectedIndex > -1)
             {
-                
+
                 Bitmap bmp = new Bitmap(pictureBoxParking.Width,
                 pictureBoxParking.Height);
                 Graphics gr = Graphics.FromImage(bmp);
@@ -91,7 +91,7 @@ namespace DegtyarevBus
                     ReloadLevels();
 
                 }
-            }             
+            }
             else
             {
                 MessageBox.Show("Добавьте стоянку", "Ошибка",
@@ -135,6 +135,11 @@ namespace DegtyarevBus
                     MessageBoxIcon.Error);
                     logger.Warn("Переполнение");
                 }
+                catch (BusStationAlreadyHaveException ex)
+                {
+                    logger.Warn(ex.Message, "Дублирование");
+                    MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка",
@@ -159,7 +164,7 @@ namespace DegtyarevBus
                         form.SetBus(bus);
                         form.ShowDialog();
                         logger.Info($"Изъят автобус {bus} с места { maskedTextBox.Text}");
-                    Draw();
+                        Draw();
                     }
                 }
                 catch (BusStationNotFoundException ex)
@@ -237,6 +242,16 @@ namespace DegtyarevBus
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                     logger.Warn("Неизвестная ошибка при сохранении");
                 }
+            }
+        }
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxParkings.SelectedIndex > -1)
+            {
+                parkingCollection[listBoxParkings.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
             }
         }
     }
