@@ -19,10 +19,10 @@ namespace DegtyarevBus
             InitializeComponent();
         }
 
-        public void SetBus(ITransport bus, int posX, int posY)
+        public void SetBus(ITransport bus)
         {
             this.bus = bus;
-            bus.SetPosition(posX, posY, pictureBoxBus.Width, pictureBoxBus.Height);
+            
             Draw();
         }
 

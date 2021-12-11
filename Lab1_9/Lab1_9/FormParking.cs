@@ -1,4 +1,5 @@
 ﻿using System;
+using NLog;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,18 +8,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DegtyarevBus
 {
     public partial class FormParking : Form
     {
         private readonly ParkingCollection parkingCollection;
+
+        private readonly Logger logger;
+
         public FormParking()
         {
             InitializeComponent();
             parkingCollection = new ParkingCollection(pictureBoxParking.Width,
-            pictureBoxParking.Height);
+    pictureBoxParking.Height);
+            logger = LogManager.GetCurrentClassLogger();
         }
+
 
         private void ReloadLevels()
         {
@@ -44,6 +51,7 @@ namespace DegtyarevBus
         {
             if (listBoxParkings.SelectedIndex > -1)
             {
+                
                 Bitmap bmp = new Bitmap(pictureBoxParking.Width,
                 pictureBoxParking.Height);
                 Graphics gr = Graphics.FromImage(bmp);
@@ -63,29 +71,30 @@ namespace DegtyarevBus
         {
             if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
             {
-                MessageBox.Show("Введите название парковки", "Ошибка",
+                MessageBox.Show("Введите название стоянки", "Ошибка",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            parkingCollection.AddParking(textBoxNewLevelName.Text);
+            logger.Info($"Добавили стоянку {textBoxNewLevelName.Text}");
+            parkingCollection.AddBusStation(textBoxNewLevelName.Text);
             ReloadLevels();
         }
 
         private void buttonDelParking_Click(object sender, EventArgs e)
         {
-
             if (listBoxParkings.SelectedIndex > -1)
             {
-                if (MessageBox.Show($"Удалить построение { listBoxParkings.SelectedItem.ToString()}?",
-                    "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show($"Удалить стоянку { listBoxParkings.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    parkingCollection.DelParking(listBoxParkings.SelectedItem.ToString());
+                    logger.Info($"Удалили стоянку { listBoxParkings.SelectedItem.ToString()}");
+                    parkingCollection.DelBusStation(textBoxNewLevelName.Text);
                     ReloadLevels();
-                }   
-            }
+
+                }
+            }             
             else
             {
-                MessageBox.Show("Добавьте парковку", "Ошибка",
+                MessageBox.Show("Добавьте стоянку", "Ошибка",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -104,19 +113,34 @@ namespace DegtyarevBus
         {
             if (bus != null && listBoxParkings.SelectedIndex > -1)
             {
-                if (((parkingCollection[listBoxParkings.SelectedItem.ToString()]) + bus) != -1)
+                try
                 {
-                    Draw();
+                    if ((parkingCollection[listBoxParkings.SelectedItem.ToString()]) +
+                    bus != -1)
+                    {
+                        Draw();
+
+                        logger.Info($"Добавлен автобус {bus}");
+
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Автобус не удалось поставить");
+                    }
                 }
-                else
+                catch (BusStationOverflowException ex)
                 {
-                    MessageBox.Show("Автобус не удалось поставить");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    logger.Warn("Переполнение");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Добавьте парковку", "Ошибка",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Неизвестная ошибка");
+                }
             }
         }
 
@@ -124,55 +148,94 @@ namespace DegtyarevBus
         {
             if (listBoxParkings.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-                var bus = parkingCollection[listBoxParkings.SelectedItem.ToString()] -
-                Convert.ToInt32(maskedTextBox.Text);
-                if (bus != null)
+                try
                 {
-                    BusForm form = new BusForm();
-                    form.SetBus(bus, 100, 100);
-                    form.ShowDialog();
+                    var bus =
+                    parkingCollection[listBoxParkings.SelectedItem.ToString()] -
+                    Convert.ToInt32(maskedTextBox.Text);
+                    if (bus != null)
+                    {
+                        BusForm form = new BusForm();
+                        form.SetBus(bus);
+                        form.ShowDialog();
+                        logger.Info($"Изъят автобус {bus} с места { maskedTextBox.Text}");
+                    Draw();
+                    }
                 }
-                Draw();
+                catch (BusStationNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    logger.Warn("Не найдено");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Неизвестная ошибка");
+                }
             }
         }
 
         private void listBoxParkings_SelectedIndexChanged(object sender, EventArgs e)
         {
+            logger.Info($"Перешли на стоянку { listBoxParkings.SelectedItem.ToString()}");
             Draw();
         }
-      
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (parkingCollection.LoadData(openFileDialog.FileName))
+                try
                 {
+                    parkingCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
                 }
-                else
+                catch (FileNotFoundException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                    logger.Warn("Ошибка при загрузке несуществующуго файла");
+                    MessageBox.Show(ex.Message, "Такого файла не существует", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (FileFormatException ex)
+                {
+                    logger.Warn("Ошибка при загрузке файла неверного формата");
+                    MessageBox.Show(ex.Message, "Файл имеет неверный формат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (TypeLoadException ex)
+                {
+                    logger.Warn("Ошибка при загрузке объектов на стоянку. Неизвестный объект или переполнение");
+                    MessageBox.Show(ex.Message, "Неизвестный объект или переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Неизвестная ошибка при сохранении");
                 }
             }
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (parkingCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
+                    parkingCollection.SaveData(saveFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Неизвестная ошибка при сохранении");
                 }
             }
         }
