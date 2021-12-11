@@ -20,9 +20,7 @@ namespace DegtyarevBus
         bool headLight, bool secondFloor) :
             base(maxSpeed, weight, mainColor, 125, 90)
         {
-            MaxSpeed = maxSpeed;
-            Weight = weight;
-            MainColor = mainColor;
+            
             DopColor = dopColor;
             HeadLight = headLight;
             SecondFloor = secondFloor;
@@ -80,6 +78,58 @@ namespace DegtyarevBus
                 
             return $"{base.ToString()}{separator}{DopColor.Name}{separator}{SecondFloor}{separator}{HeadLight}";
 
+        }
+
+        /// <summary>
+        /// Метод интерфейса IEquatable для класса SportCar
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(DoubleDecker other)
+        {
+            var res = (this as Bus).Equals(other as Bus);
+            if (!res)
+            {
+                return res;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (HeadLight != other.HeadLight)
+            {
+                return false;
+            }
+            if (SecondFloor != other.SecondFloor)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Перегрузка метода от object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is DoubleDecker carObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(carObj);
+            }
         }
     }
 }
